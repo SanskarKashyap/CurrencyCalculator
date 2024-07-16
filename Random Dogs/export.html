@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        width: 100%;
+        background: #f8e9e9;
+      }
+
+      #para1 {
+        font-size: 2.5em;
+        /* Larger font size for heading */
+        font-weight: bold;
+        /* Bold font for heading */
+        color: #1ac0ee;
+        /* A bright color for the heading */
+        text-align: center;
+        /* Center the text */
+        margin-top: 20px;
+        /* Add some space above the heading */
+      }
+
+      #para2 {
+        font-size: 1.5em;
+        /* Smaller font size for description */
+        color: #3498db;
+        /* A different color for the description */
+        text-align: center;
+        /* Center the text */
+        margin-top: 10px;
+        /* Add some space above the description */
+        padding: 10px;
+        /* Add padding around the description text */
+        border: 2px solid #3498db;
+        /* Border around the description */
+        border-radius: 10px;
+        /* Rounded corners for the border */
+        background-color: #f0f8ff;
+        /* Light background color for the description */
+        display: inline-block;
+        /* Fit content */
+      }
+
+      .button {
+        font-size: 2.5em;
+        font-weight: bold;
+        padding: 0.6%;
+        border: none;
+        border-radius: 15px;
+        text-align: center;
+        box-shadow: #7a00ff 0px 0px 10px;
+        animation: textChange 5s infinite linear;
+      }
+
+      .btn {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      @keyframes textChange {
+        0% {
+          color: #ff0000;
+          /* Red */
+        }
+
+        12.5% {
+          color: #ff7300;
+          /* Orange */
+        }
+
+        25% {
+          color: #fffb00;
+          /* Yellow */
+        }
+
+        37.5% {
+          color: #48ff00;
+          /* Green */
+        }
+
+        50% {
+          color: #00ffd5;
+          /* Cyan */
+        }
+
+        62.5% {
+          color: #002bff;
+          /* Blue */
+        }
+
+        75% {
+          color: #7a00ff;
+          /* Purple */
+        }
+
+        87.5% {
+          color: #ff00c8;
+          /* Magenta */
+        }
+
+        100% {
+          color: #ff0000;
+          /* Back to Red */
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="para">
+        <p id="para1"></p>
+        <p id="para2"></p>
+        <div class="btn">
+          <button class="button" role="button">New Dogi</button>
+        </div>
+      </div>
+    </div>
+    <script>const URL = "https://dogapi.dog/api/v2/breeds";
+        let para1 = document.querySelector("#para1");
+        let para2 = document.querySelector("#para2");
+        let button = document.querySelector(".button");
+        
+        
+        
+        const Getfacts = async () => {
+          console.log("getting data..............");
+          let Response = await fetch(URL);
+          console.log(Response.status);
+          let data = await Response.json();
+        
+          // Generate a random index between 0 and 9
+          let randomIndex = Math.floor(Math.random() * 10);
+        
+          // Access the random breed in the 'data' array
+          let breed = data.data[randomIndex]; 
+        
+          para1.innerText = `${breed.attributes.name}`;
+          para2.innerText = `${breed.attributes.description}`;
+          console.log(`Name: ${breed.attributes.name}`);
+          console.log(`Description: ${breed.attributes.description}`);
+        };
+        
+        console.log(1);
+        Getfacts();
+        button.addEventListener("click", Getfacts);
+        </script>
+  </body>
+</html>
